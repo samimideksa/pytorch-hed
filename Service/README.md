@@ -1,4 +1,4 @@
-## gRPC service for reimplementation of [Holistically-Nested Edge Detection](https://arxiv.org/pdf/1504.06375) [1] using PyTorch
+## gRPC service for implementation of [Holistically-Nested Edge Detection](https://arxiv.org/pdf/1504.06375) [1] using PyTorch
 
 
  

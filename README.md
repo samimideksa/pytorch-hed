@@ -1,3 +1,6 @@
+# gRPC Service for implementation of [Holistically-Nested Edge Detection](https://arxiv.org/pdf/1504.06375) [1] using PyTorch
+
+
 # pytorch-hed
 This is implementation of Holistically-Nested Edge Detection [1] using PyTorch. Should you be making use of this work, please cite the paper accordingly. Also, make sure to adhere to the licensing terms of the authors. Should you be making use of this particular implementation, please acknowledge it appropriately.
 
@@ -14,7 +17,17 @@ To download the pre-trained models, run `bash download.bash`. These originate fr
 To run it on your own image, use the following command. Please make sure to see their paper / the code for more details.
 
 ```
-python run.py --model bsds500 --in ./images/sample.png --out ./out.png
+		#to test the service
+		cd Service
+
+		#this will start the server 
+		python server.py
+
+
+
+		#on other terminal run 
+		python client.py --image_input "a.jpg"
+
 ```
 
  It achieves an ODS=0.774  on the BSDS500 dataset, evaluated using [this code](https://github.com/zeakey/edgeval). Please feel free to contribute to this repository by submitting issues and pull requests.
