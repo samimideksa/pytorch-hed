@@ -1,9 +1,7 @@
 ## gRPC service for reimplementation of [Holistically-Nested Edge Detection](https://arxiv.org/pdf/1504.06375) [1] using PyTorch
 
 
-## setup
-
-  - make sure you read the readme in the parent folder and installed all requirements 
+ 
   
 ## Installation 
 
@@ -11,6 +9,13 @@
       $ pip install grpcio-tools
       
       
+## setup
+
+  - make sure you read the readme in the parent folder and installed all requirements
+  - run the following command to generate gRPC classes for Python
+
+        python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. edgedetect.proto
+
 ## Runnig Demo
 
   - you can find example code that sends image to the server and get the edge detection results back 
