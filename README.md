@@ -10,27 +10,46 @@ For another reimplementation based on Caffe, please see: https://github.com/zeak
 ## Requirement
 	To install requirements for the project 
 	$ pip install -r requirements.txt
+	
+	$ pip install grpcio
+	$ pip install grpcio-tools
          
 
 ## Setup
 To download the pre-trained models, run `bash download.bash`. These originate from the original authors, I just converted them to PyTorch.
 
+- run the following command to generate gRPC classes for Python
+    
+      $python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. Service/edgedetect.proto
+
 ## Usage
 To run it on your own image, use the following command. Please make sure to see their paper / the code for more details.
 
-```
-		#to test the service
-		cd Service
 
-		#this will start the server 
-		python server.py
+	#to test the service
+	$ cd Service
+
+	#this will start the server 
+	$ python Service/server.py
 
 
 
-		#on other terminal run 
-		python client.py --image_input "a.jpg"
+	#on other terminal run 
+	$ python Service/client.py [-h] [--image_input IMAGE_INPUT]
+                       [--image_output IMAGE_OUTPUT] [--port PORT]
 
-```
+         optional arguments:
+            -h, --help            show this help message and exit
+            --image_input IMAGE_INPUT
+                                  image path
+            --image_output IMAGE_OUTPUT
+                                  output image file name like "client_out"
+            --port PORT           port you are using like : "localhost:50051" [The server must run on the port you specify ]
+
+
+
+
+
 
  It achieves an ODS=0.774  on the BSDS500 dataset, evaluated using [this code](https://github.com/zeakey/edgeval). Please feel free to contribute to this repository by submitting issues and pull requests.
 
