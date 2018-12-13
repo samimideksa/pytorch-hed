@@ -1,22 +1,33 @@
+#!/usr/bin/env python
+
 import torch
-import torch.utils.serialization
+# import torch.utils.serialization
+
+import getopt
+import math
 import numpy
+import os
 import PIL
 import PIL.Image
+import sys
 
 
 torch.set_grad_enabled(False) # make sure to not compute gradients for computational performance
 
-torch.cuda.device(1) # change this if you have a multiple graphics cards and you want to utilize them
 
-torch.backends.cudnn.enabled = True # make sure to use cudnn for computational performance
+train_on_gpu = torch.cuda.is_available()
+
+
+if train_on_gpu:
+    torch.cuda.device(1)
+    torch.backends.cudnn.enabled = True
 
 
 
 class Network(torch.nn.Module):
 	def __init__(self,model_name):
 		super(Network, self).__init__()
-		print(model_name)
+		# print(model_name)
 
 		self.moduleVggOne = torch.nn.Sequential(
 			torch.nn.Conv2d(in_channels=3, out_channels=64, kernel_size=3, stride=1, padding=1),
@@ -114,9 +125,13 @@ def estimate(tensorInput,moduleNetwork):
 	assert(intWidth == 480) # remember that there is no guarantee for correctness, comment this line out if you acknowledge this and want to continue
 	assert(intHeight == 320) # remember that there is no guarantee for correctness, comment this line out if you acknowledge this and want to continue
 
-	if True:
+	if train_on_gpu:
 		tensorInput = tensorInput.cuda()
 		tensorOutput = tensorOutput.cuda()
+	else:
+		tensorInput = tensorInput.cpu()
+		tensorOutput = tensorOutput.cpu()
+
 	# end
 
 	if True:

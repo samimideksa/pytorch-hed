@@ -21,8 +21,8 @@ edgedetect_pb2_grpc.add_EdgedetectServicer_to_server(EdgedetectServicer(),server
 
 
 # listen on port 50051
-print('Starting server. Listening on port 50051.')
-server.add_insecure_port('[::]:50051')
+print('Starting server. Listening on port 50052.')
+server.add_insecure_port('[::]:50052')
 server.start()
 
 # since server.start() will not block,
