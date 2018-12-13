@@ -31,18 +31,28 @@ train_on_gpu = torch.cuda.is_available()
 
 
 def detectedge(image_in):
-	image = PIL.Image.frombytes(data=image_in,size=(480,320),mode='RGB')
+	IMAGE_TYPE = 'RGB'
+	try:
+		image = PIL.Image.frombytes(data=image_in,size=(480,320),mode='RGB')
+	except:
+		image = PIL.Image.frombytes(data=image_in,size=(480,320),mode='L')
+		image = image.convert('RGB')
+		IMAGE_TYPE = 'L'
+
+
+
 	if train_on_gpu:
 		moduleNetwork = Network().cuda().eval()
 	else:
 		moduleNetwork = Network().eval()
 
-	tensorInput = torch.FloatTensor(numpy.array(image)[:, :, ::-1].transpose(2, 0, 1).astype(numpy.float32) * (1.0 / 255.0))
+
+	img_array = numpy.array(image)
+	tensorInput = torch.FloatTensor(img_array[:, :, ::-1].transpose(2, 0, 1).astype(numpy.float32) * (1.0 / 255.0))
 	tensorOutput = estimate(tensorInput,moduleNetwork)
 	img_out = PIL.Image.fromarray((tensorOutput.clamp(0.0, 1.0).detach().numpy().transpose(1, 2, 0)[:, :, 0] * 255.0))
-	# img_out.convert('RGB').save('server_out.png', "PNG", optimize=True)
-	# print("output",img_out.size)
-	img = img_out.convert('RGB').tobytes() 
+
+	img = img_out.convert(IMAGE_TYPE).tobytes() 
 	return img
 
 
