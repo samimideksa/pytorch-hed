@@ -7,6 +7,11 @@ For the original version of this work, please see: https://github.com/s9xie/hed
 <br />
 For another reimplementation based on Caffe, please see: https://github.com/zeakey/hed
 
+## Requirement
+	To install requirements for the project 
+	$ pip install -r requirements.txt
+         
+
 ## Setup
 To download the pre-trained models, run `bash download.bash`. These originate from the original authors, I just converted them to PyTorch.
 
