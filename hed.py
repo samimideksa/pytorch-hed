@@ -1,15 +1,8 @@
-#!/usr/bin/env python
-
 import torch
 import torch.utils.serialization
-
-import getopt
-import math
 import numpy
-import os
 import PIL
 import PIL.Image
-import sys
 
 
 torch.set_grad_enabled(False) # make sure to not compute gradients for computational performance

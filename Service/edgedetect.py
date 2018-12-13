@@ -1,19 +1,13 @@
 import torch
 import torch.utils.serialization
-
-import getopt
-import math
 import numpy
 import os
 import PIL
 import PIL.Image
 import sys
-import base64
 
 from inspect import getsourcefile
 import os.path
-import sys
-import cv2
 
 current_path = os.path.abspath(getsourcefile(lambda:0))
 current_dir = os.path.dirname(current_path)
