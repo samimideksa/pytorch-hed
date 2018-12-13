@@ -25,9 +25,9 @@ if train_on_gpu:
 
 
 class Network(torch.nn.Module):
-	def __init__(self,model_name):
+	def __init__(self):
 		super(Network, self).__init__()
-		# print(model_name)
+		model_name = 'network-bsds500.pytorch'
 
 		self.moduleVggOne = torch.nn.Sequential(
 			torch.nn.Conv2d(in_channels=3, out_channels=64, kernel_size=3, stride=1, padding=1),

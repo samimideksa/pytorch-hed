@@ -25,13 +25,18 @@ parser = argparse.ArgumentParser()
 
 
 
-def send_to_server(args):
+def open_drpc_channel(args):
 	# open a gRPC channel
 	channel = grpc.insecure_channel(args.port)
 
 	stub = edgedetect_pb2_grpc.EdgedetectStub(channel)
 
+	return stub
 	
+
+
+
+def send_to_server(args,stub):
 	file_name = args.image_input
 	out_file_name = args.image_output+'.png'
 
@@ -52,7 +57,7 @@ def send_to_server(args):
 if __name__ == "__main__":
     parser.add_argument("--image_input",type=str,help='image path')
     parser.add_argument("--image_output",type=str,default='client_out',help='output image file name like "client_out"')
-    parser.add_argument("--port",type=str,default='localhost:50052' ,help='port you are using like :   "localhost:50052" ')
+    parser.add_argument("--port",type=str,default='localhost:50051' ,help='port you are using like :   "localhost:50051" ')
 
     args = parser.parse_args()
 
@@ -60,5 +65,5 @@ if __name__ == "__main__":
     	parser.print_help()
     	sys.exit()
 
-    # stub = open_drpc_channel(args)
-    send_to_server(args)
+    stub = open_drpc_channel(args)
+    send_to_server(args,stub)

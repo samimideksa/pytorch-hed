@@ -22,7 +22,7 @@ sys.path.insert(0, parent_dir)
 
 from hed import Network ,estimate
 
-Model = '../network-bsds500.pytorch'
+
 
 train_on_gpu = torch.cuda.is_available()
 
@@ -33,9 +33,9 @@ train_on_gpu = torch.cuda.is_available()
 def detectedge(image_in):
 	image = PIL.Image.frombytes(data=image_in,size=(480,320),mode='RGB')
 	if train_on_gpu:
-		moduleNetwork = Network(Model).cuda().eval()
+		moduleNetwork = Network().cuda().eval()
 	else:
-		moduleNetwork = Network(Model).eval()
+		moduleNetwork = Network().eval()
 
 	tensorInput = torch.FloatTensor(numpy.array(image)[:, :, ::-1].transpose(2, 0, 1).astype(numpy.float32) * (1.0 / 255.0))
 	tensorOutput = estimate(tensorInput,moduleNetwork)
