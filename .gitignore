@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+Service/edgedetect_pb2.py
+Service/edgedetect_pb2_grpc.py
+
+*.pytorch
+
+*.jpg
+*.jpeg
+*.png
+*.gif
