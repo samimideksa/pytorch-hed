@@ -20,7 +20,8 @@ To download the pre-trained models, run `bash download.bash`. These originate fr
 
 - run the following command to generate gRPC classes for Python
     
-      $python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. Service/edgedetect.proto
+      # only in Service folder run
+      $ python -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. edgedetect.proto
 
 ## Usage
 To run it on your own image, use the following command. Please make sure to see their paper / the code for more details.
