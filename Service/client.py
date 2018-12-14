@@ -40,7 +40,7 @@ def send_to_server(args,stub):
 	file_name = args.image_input
 	out_file_name = args.image_output+'.png'
 
-	img = Image.open(file_name)
+	img = Image.open(file_name).convert('L')
 	img = img.resize((480,320))
 	img_b = img.tobytes() 
 
@@ -49,8 +49,8 @@ def send_to_server(args,stub):
 
 	responce = stub.DetectEdge(image_file)
 
-	image = Image.frombytes(data=responce.value,size=(480,320),mode='RGB')
-	image.convert('RGB').save(out_file_name, "PNG", optimize=True)
+	# image = Image.frombytes(data=responce.value,size=(480,320),mode='RGB')
+	# image.convert('RGB').save(out_file_name, "PNG", optimize=True)
 
 
 
