@@ -1,0 +1,11 @@
+name: edge-detection-snet-agent
+dependencies:
+    - matplotlib==2.2.2
+    - numpy==1.15.4
+    - protobuf==3.5.2
+    - Pillow==5.3.0
+    - torch==0.4.0
+    - torchvision==0.2.1
+    - grpcio==1.17.0
+    - grpcio-tools==1.17.0
+    - argparse==1.4.0
