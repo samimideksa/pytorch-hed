@@ -1,8 +1,5 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
-RUN apt-get update
-RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:deadsnakes/ppa -y
 RUN apt-get update && apt-get install -y --no-install-recommends \
         git \
         build-essential \
@@ -17,13 +14,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libxext6 \ 
         libxrender-dev
 
-COPY requirements.txt /tmp
 
-WORKDIR /tmp
-
-RUN curl https://bootstrap.pypa.io/get-pip.py | python3.6
+RUN python3.6 -m pip install -U pip
 RUN wget --timestamping http://content.sniklaus.com/github/pytorch-hed/network-bsds500.pytorch
-RUN python3.6 -m pip install -r requirements.txt
+RUN python3.6 -m pip install Pillow==5.3.0 matplotlib==2.2.2  numpy==1.15.4 torch==0.4.0 torchvision==0.2.1  argparse==1.4.0
+RUN python3.6 -m pip install grpcio grpcio-tools
+
+
 
 COPY . /pytorch-hed
 
@@ -31,6 +28,7 @@ WORKDIR /pytorch-hed
 
 EXPOSE 50051
 
-RUN python3.6 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. Service/edgedetect.proto
 
-CMD ["python", "Service/server.py"]
+RUN cd Service && python3.6 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. edgedetect.proto
+
+CMD ["python3.6", "Service/server.py"]

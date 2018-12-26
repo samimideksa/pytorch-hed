@@ -36,7 +36,7 @@ def open_drpc_channel(args):
 
 
 
-def send_to_server(args,stub):
+def send_request(args,stub):
 	file_name = args.image_input
 	out_file_name = args.image_output+'.png'
 
@@ -49,8 +49,10 @@ def send_to_server(args,stub):
 
 	responce = stub.DetectEdge(image_file)
 
-	# image = Image.frombytes(data=responce.value,size=(480,320),mode='RGB')
+	image = Image.frombytes(data=responce.value,size=(480,320),mode='RGB')
 	# image.convert('RGB').save(out_file_name, "PNG", optimize=True)
+
+	return image
 
 
 
@@ -66,4 +68,4 @@ if __name__ == "__main__":
     	sys.exit()
 
     stub = open_drpc_channel(args)
-    send_to_server(args,stub)
+    send_request(args,stub)
