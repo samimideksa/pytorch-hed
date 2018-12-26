@@ -40,7 +40,7 @@ def send_request(args,stub):
 	file_name = args.image_input
 	out_file_name = args.image_output+'.png'
 
-	img = Image.open(file_name).convert('L')
+	img = Image.open(file_name)
 	img = img.resize((480,320))
 	img_b = img.tobytes() 
 
