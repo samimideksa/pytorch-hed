@@ -50,8 +50,7 @@ class ClientTest():
 
 		return image
 	def close_channel(self,channel):
-		channel.close()
-
+		pass
 
 
 

@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:16.04
 
 RUN apt-get update
 RUN apt-get install -y software-properties-common
@@ -28,7 +28,6 @@ COPY . /pytorch-hed
 WORKDIR /pytorch-hed
 
 EXPOSE 50051
-
 
 RUN cd Service && python3.6 -m grpc_tools.protoc -I. --python_out=. --grpc_python_out=. edgedetect.proto
 
