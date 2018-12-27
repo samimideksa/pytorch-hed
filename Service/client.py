@@ -24,48 +24,52 @@ import argparse
 parser = argparse.ArgumentParser()
 
 
+class ClientTest():
+	def __init__(self,port='localhost:50051',image_output='client_out'):
+		self.port = port
+		self.image_output = image_output
 
-def open_drpc_channel(args):
-	# open a gRPC channel
-	channel = grpc.insecure_channel(args.port)
+	def open_grpc_channel(self):
+		channel = grpc.insecure_channel(self.port)
+		stub = edgedetect_pb2_grpc.EdgedetectStub(channel)
+		return stub
+		
 
-	stub = edgedetect_pb2_grpc.EdgedetectStub(channel)
-
-	return stub
-	
-
-
-
-def send_request(args,stub):
-	file_name = args.image_input
-	out_file_name = args.image_output+'.png'
-
-	img = Image.open(file_name)
-	img = img.resize((480,320))
-	img_b = img.tobytes() 
+	def send_request(self,stub,img):
+		out_file_name = self.image_output+'.png'
+		img = img
+		img = img.resize((480,320))
+		img_b = img.tobytes() 
 
 
-	image_file = edgedetect_pb2.ImageFile(value = img_b)
+		image_file = edgedetect_pb2.ImageFile(value = img_b)
 
-	responce = stub.DetectEdge(image_file)
+		responce = stub.DetectEdge(image_file)
 
-	image = Image.frombytes(data=responce.value,size=(480,320),mode='RGB')
-	# image.convert('RGB').save(out_file_name, "PNG", optimize=True)
+		image = Image.frombytes(data=responce.value,size=(480,320),mode='RGB')
 
-	return image
+		return image
+	def close_channel(self,channel):
+		channel.close()
 
 
 
-if __name__ == "__main__":
-    parser.add_argument("--image_input",type=str,help='image path')
-    parser.add_argument("--image_output",type=str,default='client_out',help='output image file name like "client_out"')
-    parser.add_argument("--port",type=str,default='localhost:50051' ,help='port you are using like :   "localhost:50051" ')
 
-    args = parser.parse_args()
 
-    if len(sys.argv) == 1:
-    	parser.print_help()
-    	sys.exit()
 
-    stub = open_drpc_channel(args)
-    send_request(args,stub)
+
+# if __name__ == "__main__":
+#     parser.add_argument("--image_input",type=str,help='image path')
+#     parser.add_argument("--image_output",type=str,default='client_out',help='output image file name like "client_out"')
+#     parser.add_argument("--port",type=str,default='localhost:50051' ,help='port you are using like :   "localhost:50051" ')
+
+#     args = parser.parse_args()
+
+#     if len(sys.argv) == 1:
+#     	parser.print_help()
+#     	sys.exit()
+
+#     client_test = ClientTest(args)
+#     stub = client_test.open_grpc_channel()
+#     image = client_test.send_request(stub)
+#     print(type(image))

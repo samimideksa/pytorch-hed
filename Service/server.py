@@ -9,7 +9,6 @@ import edgedetect
 
 class EdgedetectServicer(edgedetect_pb2_grpc.EdgedetectServicer):
 	def DetectEdge(self,request,context):
-		print("request recived")
 		responce = edgedetect_pb2.ImageFile()
 		responce.value = edgedetect.detectedge(request.value)
 		return responce

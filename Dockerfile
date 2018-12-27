@@ -16,13 +16,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 
 RUN python3.6 -m pip install -U pip
-RUN apt-get install -y software-properties-common
-RUN add-apt-repository ppa:deadsnakes/ppa -y
 RUN wget --timestamping http://content.sniklaus.com/github/pytorch-hed/network-bsds500.pytorch
-RUN python3.6 -m pip install Pillow==5.3.0 matplotlib==2.2.2  numpy==1.15.4 torch==1.0 torchvision==0.2.1  argparse==1.4.0
+RUN python3.6 -m pip install Pillow==5.3.0 matplotlib==2.2.2  numpy==1.15.4  torch==1.0  torchvision==0.2.1  argparse==1.4.0
 RUN python3.6 -m pip install grpcio grpcio-tools
-
-
 
 COPY . /pytorch-hed
 
