@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run:
           name: Get Models
-          command: bash download.sh
+          command: bash download.bash
       - run:
           name: install GRPC
           command: python3.6 -m pip install grpcio grpcio-tools
