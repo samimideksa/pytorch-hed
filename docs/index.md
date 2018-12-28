@@ -1,4 +1,4 @@
-![SingularityNet.io](images/singnet-logo.jpg?raw=true 'SingularityNET')
+![SingularityNet.io](./images/singnet-logo.jpg?raw=true 'SingularityNET')
 
 [![CircleCI](https://circleci.com/gh/IsraelAbebe/pytorch-hed.svg?style=svg)](https://circleci.com/gh/IsraelAbebe/pytorch-hed)
 
@@ -26,4 +26,4 @@ To convert to image use :
      
 Example result after saving the image might look like
 
-![SingularityNet.io](images/client_out.png?raw=true 'SingularityNET')
+![SingularityNet.io](./images/client_out.png?raw=true 'SingularityNET')
