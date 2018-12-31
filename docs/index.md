@@ -19,6 +19,12 @@ since it picks up useful edges rather than providing all edges that exist and it
 - Image then will be converted to byte using 'PIL.Image.tobytes()'
 
 # Using the service on the platform
+The returned result has the following form:
+
+        message ImageFile {
+	        bytes value = 1;
+        }
+
 The returned result image byte with 480 * 320 shape 
 To convert to image use :
     
