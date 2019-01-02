@@ -28,7 +28,7 @@ The returned result has the following form:
 The returned result image byte with 480 * 320 shape 
 To convert to image use :
     
-     `image = Image.frombytes(data=responce.value,size=(480,320),mode='RGB')`
+     image = Image.frombytes(data=responce.value,size=(480,320),mode='RGB')
      
 Example result after saving the image might look like
 
