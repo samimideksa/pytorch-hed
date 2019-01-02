@@ -32,4 +32,4 @@ To convert to image use :
      
 Example result after saving the image might look like
 
-![SingularityNet.io](./images/client_out.png?raw=true 'SingularityNET')
+![Expected output](./images/client_out.png?raw=true 'SingularityNET')
